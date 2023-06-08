@@ -40,10 +40,12 @@ class Item:
 
     @property
     def name(self):
+        '''Дает возможность обращаться к переменной name вне класса'''
         return f'{self.__name}'
 
     @name.setter
     def name(self, new_name):
+        '''Проверяет новое значение name на соответствие длине'''
         if len(new_name) <= 10:
             self.__name = new_name
             return self.__name
@@ -51,6 +53,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        '''Берет данные из файла items.csv и далвет из нах атрибуты класса '''
         with open(f'{os.path.dirname(os.path.realpath(__file__))}/items.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
 
@@ -64,6 +67,7 @@ class Item:
 
     @staticmethod
     def string_to_number(nam):
+        '''Получает на вход строковое значение числа и переводит его в класс int'''
         nam = float(nam)
         nam = int(nam)
         return nam
