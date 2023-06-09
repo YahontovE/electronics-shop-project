@@ -1,5 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
+import pytest
 
 a1=Item('gvozdi',10,12)
 
@@ -31,3 +32,6 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+def test_raises():
+    with pytest.raises(Exception):
+        a1.name = 'Супертелефон'
