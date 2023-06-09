@@ -41,15 +41,14 @@ class Item:
     @property
     def name(self):
         '''Дает возможность обращаться к переменной name вне класса'''
-        return f'{self.__name}'
+        return self.__name
 
     @name.setter
-    def name(self, new_name):
+    def name(self,new_name):
         '''Проверяет новое значение name на соответствие длине'''
-        if len(new_name) <= 10:
-            self.__name = new_name
-            return self.__name
-        raise Exception(f'Длина наименования товара превышает 10 символов.')
+        if len(new_name) > 10:
+            raise Exception(f'Длина наименования товара превышает 10 символов.')
+        self.__name=new_name
 
     @classmethod
     def instantiate_from_csv(cls):
