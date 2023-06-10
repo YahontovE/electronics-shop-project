@@ -23,6 +23,12 @@ class Item:
         self.quantity = quantity
         self.all = []
 
+    def __repr__(self):
+        return f"{__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.__name
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -44,11 +50,11 @@ class Item:
         return self.__name
 
     @name.setter
-    def name(self,new_name):
+    def name(self, new_name):
         '''Проверяет новое значение name на соответствие длине'''
         if len(new_name) > 10:
             raise Exception(f'Длина наименования товара превышает 10 символов.')
-        self.__name=new_name
+        self.__name = new_name
 
     @classmethod
     def instantiate_from_csv(cls):
@@ -70,3 +76,8 @@ class Item:
         nam = float(nam)
         nam = int(nam)
         return nam
+
+
+#item = Item("Имя", 12, 25)
+#print(repr(item))
+# print(item)
