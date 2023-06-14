@@ -51,3 +51,6 @@ def test__repr__():
 
 def test__str__():
     assert str(a1) == 'gvozdi'
+
+def test__add__():
+    assert a1 + a1 == 24
