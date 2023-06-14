@@ -78,8 +78,3 @@ class Item:
         nam = float(nam)
         nam = int(nam)
         return nam
-
-
-#item = Item("Имя", 12, 25)
-#print(repr(item))
-# print(item)
