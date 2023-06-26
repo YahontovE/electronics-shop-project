@@ -54,3 +54,11 @@ def test__str__():
 
 def test__add__():
     assert a1 + a1 == 24
+
+
+def test_instantiate_from_csv_raise():
+    with pytest.raises(Exception):
+        Item.instantiate_from_csv()
+
+
+
