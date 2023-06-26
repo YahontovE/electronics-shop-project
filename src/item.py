@@ -3,6 +3,10 @@ import os
 import csv
 
 
+class InstantiateCSVError(Exception):
+    pass
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -28,8 +32,9 @@ class Item:
 
     def __str__(self):
         return self.__name
+
     def __add__(self, other):
-        return self.quantity+other.quantity
+        return self.quantity + other.quantity
 
     def calculate_total_price(self) -> float:
         """
@@ -60,16 +65,21 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        '''Берет данные из файла items.csv и далвет из нах атрибуты класса '''
-        with open(f'{os.path.dirname(os.path.realpath(__file__))}/items.csv', newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
+        '''Берет данные из файла items.csv и делает из нах атрибуты класса '''
+        try:
+            with open(f'{os.path.dirname(os.path.realpath(__file__))}/items.csv', newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
 
-            for row in reader:
-                name = row['name']
-                price = row['price']
-                quantity = row['quantity']
-                new = Item(name, price, quantity)
-                cls.all.append(new)
+                for row in reader:
+                    name = row['name']
+                    price = row['price']
+                    quantity = row['quantity']
+                    if quantity == None:
+                        raise InstantiateCSVError('Файл item.csv поврежден')
+                    new = Item(name, price, quantity)
+                    cls.all.append(new)
+        except FileNotFoundError:
+            raise FileNotFoundError('Отсутствует файл item.csv')
         return cls(name, price, quantity)
 
     @staticmethod
@@ -78,3 +88,8 @@ class Item:
         nam = float(nam)
         nam = int(nam)
         return nam
+
+
+#Item.instantiate_from_csv()
+# print(Item.instantiate_from_csv())
+# print(Item.all)
