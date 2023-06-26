@@ -88,8 +88,3 @@ class Item:
         nam = float(nam)
         nam = int(nam)
         return nam
-
-
-#Item.instantiate_from_csv()
-# print(Item.instantiate_from_csv())
-# print(Item.all)
